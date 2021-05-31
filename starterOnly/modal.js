@@ -45,7 +45,7 @@ const validation = document.getElementById("btn-envoie");
 const validation_ok = document.getElementById("validation-ok");
 
 
-
+//regex
 var mailCaractere = /^([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})$/;
 var prenomValidation = /^[a-zA-Zéèîï][a-zéèêàçîï]+([-'\s][a-zA-Zéèîï][a-zéèêàçîï]+)?/;
 var nomValidation = /^[a-zA-Zéèîï][a-zéèêàçîï]+([-'\s][a-zA-Zéèîï][a-zéèêàçîï]+)?/;
@@ -66,7 +66,7 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-function fermerModal(){
+function fermerModal(){  // fonction qui ferme le formulaire.
   validation_ok.innerHTML="";
   modalbg.style.display = "none";
 }
@@ -76,14 +76,14 @@ function fermerModal(){
 
 function validate () {
   
-  if (prenom.value === '' || prenom.value.length <2)
+  if (prenom.value.trim() === '' || prenom.value.length <2)  // condition  si le prenom est vide ou inf a 2 caractères
 
   {
     prenom_m.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
     prenom_m.style.fontSize = "14px";
     prenom_m.style.color="red";
     
-  }else if(prenomValidation.test(prenom.value.trim()) == false){
+  }else if(prenomValidation.test(prenom.value) == false){  // Dans le cas ou on rentre des chiffres ou caractère spéciaux
     prenom_m.innerHTML  = "Veuillez entrez un prénom correct ";
     prenom_m.style.fontSize = "14px";
     prenom_m.style.color="red";
@@ -93,14 +93,14 @@ function validate () {
     prenom_m.innerHTML  = "";
   }
   
-
-  if (nom.value === '' || nom.value.length <2)
+  // condition  si le nom est vide ou inf a 2 caractères
+  if (nom.value.trim() === '' || nom.value.length <2) 
   {
     nom_m.innerHTML  = "Veuillez entrer 2 caractères ou plus pour le champ du nom."; 
     nom_m.style.fontSize = "14px";
     nom_m.style.color="red";
     
-  }else if (nomValidation.test(nom.value.trim()) == false){
+  }else if (nomValidation.test(nom.value) == false){
     nom_m.innerHTML  = "Veuillez entrez un nom correct";
     nom_m.style.fontSize = "14px";
     nom_m.style.color="red";
@@ -109,6 +109,7 @@ function validate () {
     nom_m.innerHTML  = "";
   }
 
+  //Si vide ou caractère autre que des chiffres/nombres 
   if (naissance.value ==='' || (naissanceValidation.test(naissance.value) == false)){
     naissance_m.innerHTML = "Veuillez entrez votre date de naissance";
     naissance_m.style.fontSize = "14px";
@@ -118,7 +119,7 @@ function validate () {
   else{
     naissance_m.innerHTML = "";
   }
-
+  // condition si vide ou si valeur different d'un nombres
   if (nombreTournois.value === '' || tournoisValidation.test(nombreTournois.value) == false){
     nombreTournois_m.innerHTML  = "Veuillez entrer le nombre de tournois participé";
     nombreTournois_m.style.fontSize = "14px";
@@ -127,8 +128,8 @@ function validate () {
   }else{
     nombreTournois_m.innerHTML  = "";
   }
-
-  if(mailCaractere.test(email.value)){
+  // verification de l'adresse mail grace au regex mailCaractere
+  if(mailCaractere.test(email.value)== true){
     email_m.innerHTML  = "";
   }
   else{
@@ -137,7 +138,7 @@ function validate () {
     email_m.style.color="red";
     
   }
-
+  // verification si une des box est coché.
   if ((location1.checked)|| (location2.checked) || (location3.checked)
     ||(location4.checked) ||(location5.checked) ||(location6.checked)) {
     location_m.innerHTML  = "";
@@ -158,6 +159,7 @@ function validate () {
     condition_m.style.color="red"; 
     
   }
+  //condition final si tout est OK alors on envoie un message au client.
   if (prenom.value && nom.value && naissance.value &&
     nombreTournois.value && email.value && ((location1.checked)|| 
     (location2.checked) || (location3.checked)||(location4.checked) ||
@@ -165,5 +167,5 @@ function validate () {
       validation_ok.innerHTML= "Merci ! Votre réservation a bien été reçue.";
       validation_ok.style.fontSize = "16px";
       
-    }
+  }
 }
