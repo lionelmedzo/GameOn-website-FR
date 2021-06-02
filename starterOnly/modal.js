@@ -44,6 +44,14 @@ const condition_m = document.getElementById("condition_erreur");
 const validation = document.getElementById("btn-envoie");
 const validation_ok = document.getElementById("validation-ok");
 
+const fermer = document.getElementById("fermer");
+const submitBtn = document.querySelector(".btn-submit");
+const confirmation = document.getElementById("confirmation");
+const reserve = document.getElementById("reserve");
+
+
+
+
 
 //regex
 var mailCaractere = /^([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})$/;
@@ -66,15 +74,18 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
+
 function fermerModal(){  // fonction qui ferme le formulaire.
   validation_ok.innerHTML="";
   modalbg.style.display = "none";
 }
 
+fermer.style.display = "none";        // cacher le bouton "fermer"
+confirmation.style.display = "none"; // cacher le message 
 
 
 
-function validate () {
+function validate (event) {
   
   if (prenom.value.trim() === '' || prenom.value.length <2)  // condition  si le prenom est vide ou inf a 2 caractères
 
@@ -84,7 +95,7 @@ function validate () {
     prenom_m.style.color="red";
     
   }else if(prenomValidation.test(prenom.value) == false){  // Dans le cas ou on rentre des chiffres ou caractère spéciaux
-    prenom_m.innerHTML  = "Veuillez entrez un prénom correct ";
+    prenom_m.innerHTML  = "Veuillez entrer un prénom correct ";
     prenom_m.style.fontSize = "14px";
     prenom_m.style.color="red";
     
@@ -101,7 +112,7 @@ function validate () {
     nom_m.style.color="red";
     
   }else if (nomValidation.test(nom.value) == false){
-    nom_m.innerHTML  = "Veuillez entrez un nom correct";
+    nom_m.innerHTML  = "Veuillez entrer un nom correct";
     nom_m.style.fontSize = "14px";
     nom_m.style.color="red";
     
@@ -111,7 +122,7 @@ function validate () {
 
   //Si vide ou caractère autre que des chiffres/nombres 
   if (naissance.value ==='' || (naissanceValidation.test(naissance.value) == false)){
-    naissance_m.innerHTML = "Veuillez entrez votre date de naissance";
+    naissance_m.innerHTML = "Veuillez entrer votre date de naissance";
     naissance_m.style.fontSize = "14px";
     naissance_m.style.color="red";
     
@@ -159,13 +170,29 @@ function validate () {
     condition_m.style.color="red"; 
     
   }
+ 
   //condition final si tout est OK alors on envoie un message au client.
   if (prenom.value && nom.value && naissance.value &&
     nombreTournois.value && email.value && ((location1.checked)|| 
     (location2.checked) || (location3.checked)||(location4.checked) ||
     (location5.checked) ||(location6.checked)) && checkbox1.checked === true){
-      validation_ok.innerHTML= "Merci ! Votre réservation a bien été reçue.";
-      validation_ok.style.fontSize = "16px";
       
+    confirmation.style.fontSize = "30px";
+    confirmation.style.textAlign = "center";
+    confirmation.style.marginBottom ="50%";
+    confirmation.style.marginTop ="50%";
+    reserve.style.display = "none";
+  
+    fermer.style.display = "block";
+    
+    submitBtn.style.display = "none";
+    
+    confirmation.style.display = "flex";
+    
+    
+    fermer.addEventListener("click", fermerModal);
+    
   }
+  
 }
+

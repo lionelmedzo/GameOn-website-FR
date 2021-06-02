@@ -55,14 +55,17 @@
       <div class="bground">
         <div class="content">
           <span class="close"></span>
+          
           <div class="modal-body">
-            <form
+            <form 
               name="reserve"
+              id= "reserve"
               
              
             >
               <div
                 class="formData">
+                
                 <label for ="first" >Prénom</label><br>
                 <input
                   class="text-control"
@@ -213,6 +216,7 @@
                 </label>
                 <br>
               </div>
+            
               <input
                 class="btn-submit"
                 type="button"
@@ -221,7 +225,19 @@
                 id ="btn-envoie"
               />
               <span id = "validation-ok"></span>
+            
             </form>
+          
+            <div id="confirmation">Merci ! 
+              <br>Votre réservation a bien été reçue.
+            </div>
+            <input
+              id = "fermer"
+              class="btn-submit"
+              type="button"
+              value="Fermer"
+            />
+          </div>
           </div>
         </div>
       </div>
